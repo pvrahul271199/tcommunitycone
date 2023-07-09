@@ -46,7 +46,7 @@ const tweetNews= async (tweetMessages) => {
         if ((isSameDate(tweetMessages.datePublished)) && (tweetMessages.name !== null) && (tweetMessages.url!== null)){
             const message = `${tweetMessages.name} \n${tweetMessages.url}`;
             console.log(message);
-            //await rwUser.v2.tweet(message);
+            await rwUser.v2.tweet(message);
             logValues.time = new Date();
             logValues.message = "Tweeted";
             logs.push(logValues);
