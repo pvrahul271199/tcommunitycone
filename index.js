@@ -11,6 +11,7 @@ const timer = (duration) =>
   new Promise((resolve) => setTimeout(resolve, duration));
 
 const logs = [];
+const newLogs = [];
 const logValues = {
     time: null,
     message: null
@@ -46,6 +47,7 @@ const tweetNews= async (tweetMessages) => {
         if ((isSameDate(tweetMessages.datePublished)) && (tweetMessages.name !== null) && (tweetMessages.url!== null)){
             const message = `${tweetMessages.name} \n${tweetMessages.url}`;
             console.log(message);
+            newLogs.push(message);
             await rwUser.v2.tweet(message);
             logValues.time = new Date();
             logValues.message = "Tweeted";
@@ -58,7 +60,7 @@ const tweetNews= async (tweetMessages) => {
 }
 
 const newsTimeout = async () => {
-    setInterval(selectNews,600000);
+    setInterval(selectNews,300000);
 }
 
 app.get('/isWorking', (req, res) => { 
