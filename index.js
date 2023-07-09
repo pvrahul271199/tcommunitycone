@@ -64,8 +64,8 @@ const newsTimeout = async () => {
 }
 
 app.get('/isWorking', (req, res) => { 
-
-    res.send(`\nLast changed on - Sun Jul 09 2023 22:51:08 \n ${logs.time} - ${logs.message}`);
+    console.log(newLogs[0]);
+    res.send(`\nLast changed on - Sun Jul 09 2023 22:51:08 \n ${logs.time} - ${logs.message} --${newLogs[0]} `);
 
 })
 
