@@ -23,6 +23,7 @@ var data = [];
 let previousResponse = null;
 async function callNewsAPI() {
     try {
+        console.log("3");
         const response = await axios.request(options);
         console.log(isSameResponse(previousResponse, response));
         if (previousResponse && isSameResponse(previousResponse, response)) {
