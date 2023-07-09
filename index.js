@@ -32,7 +32,7 @@ const selectNews = async () => {
             tweetBody.datePublished = newsBody[i].datePublished;
             tweetMessages.push(tweetBody);
             tweetNews(tweetMessages[i]);
-            await timer(300000);
+            await timer(120000);
         }
     }else{
         console.log("No new news");
