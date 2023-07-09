@@ -32,7 +32,7 @@ const selectNews = async () => {
             tweetBody.datePublished = newsBody[i].datePublished;
             tweetMessages.push(tweetBody);
             tweetNews(tweetMessages[i]);
-            await timer(120000);
+            await timer(60000);
         }
     }else{
         console.log("No new news");
@@ -58,7 +58,7 @@ const tweetNews= async (tweetMessages) => {
 }
 
 const newsTimeout = async () => {
-    setInterval(selectNews,1800000);
+    setInterval(selectNews,600000);
 }
 
 app.get('/isWorking', (req, res) => { 
