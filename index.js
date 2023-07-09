@@ -62,8 +62,7 @@ const newsTimeout = async () => {
 }
 
 app.get('/isWorking', (req, res) => { 
-
-    console.log(i);
+    
     console.log("working");
     res.send(`${logs.time} - ${logs.message}`);
      
