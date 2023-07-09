@@ -24,7 +24,7 @@ const selectNews = async () => {
             tweetBody.datePublished = newsBody[i].datePublished;
             tweetMessages.push(tweetBody);
             tweetNews(tweetMessages[i]);
-            await timer(6000);
+            await timer(120000);
         }
     }else{
         console.log("No new news");
@@ -38,7 +38,6 @@ const tweetNews= async (tweetMessages) => {
         if ((isSameDate(tweetMessages.datePublished)) && (tweetMessages.name !== null) && (tweetMessages.url!== null)){
             const message = `${tweetMessages.name} \n${tweetMessages.url}`;
             console.log(message);
-            newLogs.push(message);
             await rwUser.v2.tweet(message);
             console.log("Tweeted");
         }
@@ -49,7 +48,7 @@ const tweetNews= async (tweetMessages) => {
 
 const newsTimeout = async () => {
     console.log("1");
-    setInterval(selectNews,60000);
+    setInterval(selectNews,1800000);
 }
 
 app.get('/isWorking', (req, res) => { 
