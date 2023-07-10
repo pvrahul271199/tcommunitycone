@@ -28,8 +28,7 @@ async function callNewsAPI() {
         console.log(response);
         console.log(isSameResponse(previousResponse, response));
         if (previousResponse && isSameResponse(previousResponse, response)) {
-            console.error("null");
-            return null
+            return ""
         } else {
             data = response.data.value;
             previousResponse = response.data.value;

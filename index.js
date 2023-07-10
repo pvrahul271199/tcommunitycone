@@ -15,7 +15,7 @@ const selectNews = async () => {
     const tweetMessages = [];
     console.log("api called");
     const newsBody = await callNewsAPI();
-    if(newsBody!==undefined){
+    if(newsBody!=""){
         for(let i=0;i<newsBody.length; i++)
         {
             const tweetBody = {};
