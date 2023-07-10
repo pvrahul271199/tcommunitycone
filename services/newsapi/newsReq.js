@@ -1,4 +1,4 @@
-const axios = require('axios');
+const Axios = require('axios');
 const { isSameResponse } = require('../../tools/isSameResponse.js');
 const apiKey= process.env.NEWSAPI_ACCESS_TOKEN;
 
@@ -24,7 +24,7 @@ let previousResponse = null;
 async function callNewsAPI() {
     try {
         console.log("3");
-        const response = await axios.request(options);
+        const response = await Axios.request(options);
         console.log(response);
         console.log(isSameResponse(previousResponse, response));
         if (previousResponse && isSameResponse(previousResponse, response)) {
