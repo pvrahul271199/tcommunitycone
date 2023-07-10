@@ -15,7 +15,7 @@ const selectNews = async () => {
     const tweetMessages = [];
     console.log("api called");
     const newsBody = await callNewsAPI();
-    if(newsBody!==null){
+    if(newsBody!==undefined){
         for(let i=0;i<newsBody.length; i++)
         {
             const tweetBody = {};
@@ -51,9 +51,9 @@ const tweetNews= async (tweetMessages) => {
 const newsTimeout = async () => {
     setInterval(selectNews,300000);
 }
-
+newsTimeout();
 app.get('/isWorking', (req, res) => { 
-    newsTimeout();
+    
     res.send(`\nLast changed on - Sun Jul 09 2023 22:51:08 \n Refreshed Time:${new Date()}`);
     
 })
