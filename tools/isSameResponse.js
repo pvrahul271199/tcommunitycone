@@ -6,4 +6,4 @@ function isSameResponse(previousResponse, response) {
     }
  }
 
-module.exports = { isSameResponse };
+export { isSameResponse };

@@ -10,4 +10,4 @@ function isSameDate(PublishedAt){
       dateObj.getDate() === currentDate.getDate()
     );
 }
-module.exports = { isSameDate };
+export { isSameDate };

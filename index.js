@@ -1,9 +1,10 @@
-const { rwUser } = require("./services/twitterapi/twitterUser.js");
-const { isSameDate } = require("./tools/isSameDate.js")
-const { callNewsAPI } = require("./services/newsapi/newsReq.js")
-const express = require('express');
+import { rwUser } from './services/twitterapi/twitterUser.js';
+import { isSameDate } from './tools/isSameDate.js';
+import { callNewsAPI } from './services/newsapi/newsReq.js';
+import express from 'express';
+
 const app = express();
-require("dotenv").config();
+
 
 const PORT = process.env.PORT || 8000
 
@@ -49,7 +50,7 @@ const tweetNews= async (tweetMessages) => {
 }
 
 const newsTimeout = async () => {
-    setInterval(selectNews,300000);
+    setInterval(selectNews,120000);
 }
 newsTimeout();
 
