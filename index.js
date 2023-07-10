@@ -13,6 +13,7 @@ const timer = (duration) =>
 const selectNews = async () => {
     console.log("2");
     const tweetMessages = [];
+    console.log("api called");
     const newsBody = await callNewsAPI();
     if(newsBody!==null){
         for(let i=0;i<newsBody.length; i++)
@@ -23,6 +24,7 @@ const selectNews = async () => {
             tweetBody.url = newsBody[i].url;
             tweetBody.datePublished = newsBody[i].datePublished;
             tweetMessages.push(tweetBody);
+            console.log(i);
             tweetNews(tweetMessages[i]);
             await timer(60000);
         }

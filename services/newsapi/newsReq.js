@@ -25,6 +25,7 @@ async function callNewsAPI() {
     try {
         console.log("3");
         const response = await axios.request(options);
+        console.log("response",response);
         console.log(isSameResponse(previousResponse, response));
         if (previousResponse && isSameResponse(previousResponse, response)) {
             return null
