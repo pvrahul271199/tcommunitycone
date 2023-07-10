@@ -52,6 +52,7 @@ const newsTimeout = async () => {
     setInterval(selectNews,300000);
 }
 newsTimeout();
+
 app.get('/isWorking', (req, res) => { 
     
     res.send(`\nLast changed on - Sun Jul 09 2023 22:51:08 \n Refreshed Time:${new Date()}`);

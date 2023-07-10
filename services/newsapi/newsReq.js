@@ -25,9 +25,10 @@ async function callNewsAPI() {
     try {
         console.log("3");
         const response = await axios.request(options);
-        console.log("response",response);
+        console.log(response);
         console.log(isSameResponse(previousResponse, response));
         if (previousResponse && isSameResponse(previousResponse, response)) {
+            console.error("null");
             return null
         } else {
             data = response.data.value;
@@ -37,7 +38,7 @@ async function callNewsAPI() {
           }
         
     } catch (error) {
-        console.error(error);
+        console.error("error",error);
     }
 };
 
