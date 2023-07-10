@@ -11,7 +11,7 @@ const timer = (duration) =>
   new Promise((resolve) => setTimeout(resolve, duration));
 
 const selectNews = async () => {
-    console.log("2");
+    
     const tweetMessages = [];
     console.log("api called");
     const newsBody = await callNewsAPI();
@@ -49,7 +49,6 @@ const tweetNews= async (tweetMessages) => {
 }
 
 const newsTimeout = async () => {
-    console.log("1");
     setInterval(selectNews,300000);
 }
 
