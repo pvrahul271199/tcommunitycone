@@ -110,7 +110,7 @@ app.get('/', (req, res) => {
     }
     
     
-    newsTimeout();
+    selectNews();
     res.send(`\nLast changed on - Sun Jul 09 2023 22:51:08 \n Refreshed Time:${new Date()}`); 
 })
 
