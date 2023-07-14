@@ -7,7 +7,7 @@ function isSameDate(PublishedAt){
     return (
       dateObj.getFullYear() === currentDate.getFullYear() &&
       dateObj.getMonth() === currentDate.getMonth() &&
-      dateObj.getDate() === currentDate.getDate()
+      dateObj.getDate() === currentDate.getDate() - 1
     );
 }
 export { isSameDate };

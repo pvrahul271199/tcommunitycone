@@ -1,8 +1,8 @@
 function isSameResponse(previousResponse, response) {
-    if(previousResponse!==response.data.value){
-         return true
+    if(previousResponse!==response){
+        return true
     }else{
-         return false
+        return false
     }
  }
 
