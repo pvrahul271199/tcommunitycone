@@ -109,9 +109,7 @@ app.get('/', (req, res) => {
         );
     }
     
-    const newsTimeout = async () => {
-        setInterval(selectNews,120000);
-    }
+    
     newsTimeout();
     res.send(`\nLast changed on - Sun Jul 09 2023 22:51:08 \n Refreshed Time:${new Date()}`); 
 })
