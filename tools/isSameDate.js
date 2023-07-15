@@ -12,7 +12,7 @@ function isSameDate(datePublished){
   const minutes = Math.floor(seconds / 60);
   const hours = Math.floor(minutes / 60);
   const days = Math.floor(hours / 24);
-
+console.log(hours);
   // Return the time difference as an object
   if(hours<24){
     return true
@@ -20,4 +20,6 @@ function isSameDate(datePublished){
     return false
   }
 }
+const vslue = isSameDate('2023-07-15T01:00:40.0000000Z');
+console.log(vslue);
 export { isSameDate };

@@ -1,6 +1,7 @@
 import { rwUser } from './services/twitterapi/twitterUser.js';
 import { isSameDate } from './tools/isSameDate.js';
 import { callNewsAPI } from './services/newsapi/newsReq.js';
+import cron from 'node-cron';
 import express from 'express';
 
 const app = express();
@@ -50,10 +51,9 @@ const tweetNews= async (tweetMessages) => {
       }
 }
 
-const newsTimeout = async () => {
-    setInterval(selectNews,120000);
-}
-newsTimeout();
+cron.schedule('*/3 * * * *', () => {
+    selectNews();
+  });
 
 app.get('/isWorking', (req, res) => { 
     
