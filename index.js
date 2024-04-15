@@ -30,11 +30,11 @@ const selectNews = async () => {
             tweetNews(tweetMessages[i]);
             await timer(60000);
         }
-        selectNews();
+        await selectNews();
     }else
      {
         console.log("No new news");
-        selectNews();
+        await selectNews();
     }
 }
 
@@ -59,7 +59,7 @@ const tweetNews= async (tweetMessages) => {
 
 app.get('/isWorking', (req, res) => {
     selectNews()
-    res.send(`\nLast changed on - Sun Jul 09 2023 22:51:08 \n Refreshed Time:${new Date()}`);
+    res.send(`\nv2 Last changed on - Sun Jul 09 2023 22:51:08 \n Refreshed Time:${new Date()}`);
 
 })
 
