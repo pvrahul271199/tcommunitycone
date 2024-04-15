@@ -6,9 +6,11 @@ let previousResponse = [];
 async function scrapData() {
     let browser;
     try{
-        const browser = await puppeteer.launch();
+        const browser = await puppeteer.launch({
+            headless: true,
+            args: ['--no-sandbox','--disable-setuid-sandbox']
+        })
         const page = await browser.newPage();
-
         await page.goto('https://www.thehindu.com/news/national/');
 
         const htmlContent = await page.content();
