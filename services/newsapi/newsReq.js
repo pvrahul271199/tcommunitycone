@@ -22,9 +22,9 @@ async function callNewsAPI() {
     try {
         console.log("3");
         const result = await fetch(url, options);
-        //console.log("result",result);
+        console.log("result",result);
         const newResult = await result.json();
-        //console.log("newResult",newResult);
+        console.log("newResult",newResult);
         const response = await newResult.value;
         console.log("response",response);
         console.log(response.length);
