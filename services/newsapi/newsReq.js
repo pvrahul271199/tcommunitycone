@@ -1,31 +1,29 @@
 import fetch from 'node-fetch'
 import { isSameResponse } from '../../tools/isSameResponse.js';
 
-const NEWSAPI_ACCESS_TOKEN="d25290f43ab94ec78fb33024be6f8738"
-const apiKey= NEWSAPI_ACCESS_TOKEN;
 
 
-
-const url = 'https://bing-news-search1.p.rapidapi.com/news?safeSearch=Off&textFormat=Raw';
+const url = 'https://news-api14.p.rapidapi.com/top-headlines?country=in&language=en&pageSize=10';
 const options = {
   method: 'GET',
   headers: {
-    'X-BingApis-SDK': 'true',
     'X-RapidAPI-Key': 'c016081313mshe24bfd6c427b622p1d2208jsn0f8a5336ead8',
-    'X-RapidAPI-Host': 'bing-news-search1.p.rapidapi.com'
+    'X-RapidAPI-Host': 'news-api14.p.rapidapi.com'
   }
 };
+
+
 
 var data = [];
 let previousResponse = [];
 async function callNewsAPI() {
     try {
-        console.log("3");
+        console.log("1");
         const result = await fetch(url, options);
-        console.log("result",result);
+        console.log("2",result);
         const newResult = await result.json();
-        console.log("newResult",newResult);
-        const response = await newResult.value;
+        console.log("3",newResult);
+        const response = await newResult.articles;
         console.log("response",response);
         console.log(response.length);
         console.log(isSameResponse(previousResponse, response));
@@ -34,8 +32,8 @@ async function callNewsAPI() {
             return ""
         } else {
             //data = response.data.value;
-            previousResponse = response[0];
-            console.log("data",data.length);
+            previousResponse = response;
+            console.log("actual data",response);
             return response;
           }
         
