@@ -15,6 +15,7 @@ const selectNews = async () => {
     
 const tweetMessages = [];
     console.log("api called");
+    await timer(300000);
     const newsBody = await callNewsAPI();
     console.log("inside index", newsBody);
     if(newsBody.length>0){
@@ -32,7 +33,6 @@ const tweetMessages = [];
     }else
      {
         console.log("No new news");
-        await timer(60000);
         await selectNews();
     }
 }
@@ -41,7 +41,7 @@ const tweetNews= async (tweetMessages) => {
     try {
         console.log("tweet message", tweetMessages);
         console.log("same date",isSameDate(tweetMessages.datePublished));
-        if ((tweetMessages.name !== null) && (tweetMessages.url!== null)){
+        if ((tweetMessages.title !== null) && (tweetMessages.url!== null)){
             const message = `${tweetMessages.name} \n${tweetMessages.url}`;
             console.log("inside tweet message", message);
             await rwUser.v2.tweet(message);
