@@ -26,17 +26,13 @@ const tweetMessages = [];
             tweetMessages.push(tweetBody);
             console.log(i);
             tweetNews(tweetMessages[i]);
-            await timer(60000);
+            await timer(300000);
         }
-        console.log("No new news waiting for 50 minutes");
-        await timer(3000000);
-        console.log("50 minutes completed in 1st");
         await selectNews();
     }else
      {
-        console.log("No new news waiting for 50 minutes");
-        await timer(3000000);
-        console.log("50 minutes completed");
+        console.log("No new news");
+        await timer(60000);
         await selectNews();
     }
 }
@@ -60,7 +56,7 @@ const tweetNews= async (tweetMessages) => {
 
 app.get('/isWorking', (req, res) => {
     selectNews()
-    res.send(`\nv4 Last changed on - Sun Jul 09 2023 22:51:08 \n Refreshed Time:${new Date()}`);
+    res.send(`\nv5 Last changed on - Sun Jul 09 2023 22:51:08 \n Refreshed Time:${new Date()}`);
 
 })
 
