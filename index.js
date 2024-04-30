@@ -28,11 +28,15 @@ const tweetMessages = [];
             tweetNews(tweetMessages[i]);
             await timer(60000);
         }
+        console.log("No new news waiting for 50 minutes");
+        await timer(3000000);
+        console.log("50 minutes completed in 1st");
         await selectNews();
     }else
      {
-        console.log("No new news");
-        await timer(60000);
+        console.log("No new news waiting for 50 minutes");
+        await timer(3000000);
+        console.log("50 minutes completed");
         await selectNews();
     }
 }
