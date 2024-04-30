@@ -5,7 +5,6 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "heroku-postbuild": "rm -rf ./.cache mkdir ./.cache && mv /app/.cache/puppeteer ./.cache",
     "start": "node index.js"
   },
   "author": "rahul",
