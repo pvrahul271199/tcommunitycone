@@ -1,8 +1,6 @@
 import { rwUser } from './services/twitterapi/twitterUser.js';
 import { isSameDate } from './tools/isSameDate.js';
 import { callNewsAPI } from './services/newsapi/newsReq.js';
-import { scrapData } from "./services/scrapping/scrapData.js";
-import cron from 'node-cron';
 import express from 'express';
 
 const app = express();
@@ -15,16 +13,16 @@ const timer = (duration) =>
 
 const selectNews = async () => {
     
-    const tweetMessages = [];
+const tweetMessages = [];
     console.log("api called");
-    const newsBody = await scrapData();
-    console.log(newsBody);
+    const newsBody = await callNewsAPI();
+    console.log("inside index", newsBody);
     if(newsBody.length>0){
         for(let i=0;i<newsBody.length; i++)
         {
             const tweetBody = {};
-            tweetBody.name = newsBody[i].newsTitle;
-            tweetBody.url = newsBody[i].newsLink;
+            tweetBody.name = newsBody[i].title;
+            tweetBody.url = newsBody[i].url;
             tweetMessages.push(tweetBody);
             console.log(i);
             tweetNews(tweetMessages[i]);
@@ -34,17 +32,18 @@ const selectNews = async () => {
     }else
      {
         console.log("No new news");
+        await timer(60000);
         await selectNews();
     }
 }
 
 const tweetNews= async (tweetMessages) => {
     try {
-        console.log(tweetMessages);
+        console.log("tweet message", tweetMessages);
         console.log("same date",isSameDate(tweetMessages.datePublished));
         if ((tweetMessages.name !== null) && (tweetMessages.url!== null)){
             const message = `${tweetMessages.name} \n${tweetMessages.url}`;
-            console.log(message);
+            console.log("inside tweet message", message);
             await rwUser.v2.tweet(message);
             console.log("Tweeted");
         }
@@ -53,9 +52,7 @@ const tweetNews= async (tweetMessages) => {
       }
 }
 
-// cron.schedule('*/3 * * * *', () => {
-//     selectNews();
-//   });
+
 
 app.get('/isWorking', (req, res) => {
     selectNews()
