@@ -15,7 +15,6 @@ const selectNews = async () => {
     
 const tweetMessages = [];
     console.log("api called");
-    await timer(300000);
     const newsBody = await callNewsAPI();
     console.log("inside index", newsBody);
     if(newsBody.length>0){
@@ -26,9 +25,9 @@ const tweetMessages = [];
             tweetBody.url = newsBody[i].url;
             tweetMessages.push(tweetBody);
             console.log(i);
-            await timer(300000);
-            console.log(i,"5 minutes ended");
             tweetNews(tweetMessages[i]);
+            console.log(i,"30 minutes timer started");
+            await timer(1800000);
         }
         await selectNews();
     }else
