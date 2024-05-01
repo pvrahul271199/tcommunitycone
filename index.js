@@ -26,8 +26,9 @@ const tweetMessages = [];
             tweetBody.url = newsBody[i].url;
             tweetMessages.push(tweetBody);
             console.log(i);
-            tweetNews(tweetMessages[i]);
             await timer(300000);
+            console.log(i,"5 minutes ended");
+            tweetNews(tweetMessages[i]);
         }
         await selectNews();
     }else
