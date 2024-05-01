@@ -3,7 +3,7 @@ import { isSameResponse } from '../../tools/isSameResponse.js';
 
 
 
-const url = 'https://news-api14.p.rapidapi.com/top-headlines?country=in&language=en&pageSize=1';
+const url = 'https://news-api14.p.rapidapi.com/top-headlines?country=in&language=en&pageSize=3';
 const options = {
   method: 'GET',
   headers: {
