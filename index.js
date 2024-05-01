@@ -60,6 +60,11 @@ app.get('/isWorking', (req, res) => {
 
 })
 
+app.get('/version', (req, res) => {
+    res.send(`\nv7`);
+
+})
+
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`)
   })
