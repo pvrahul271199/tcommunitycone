@@ -56,7 +56,7 @@ const tweetNews= async (tweetMessages) => {
 
 app.get('/isWorking', (req, res) => {
     selectNews()
-    res.send(`\nv6 Last changed on - Sun Jul 09 2023 22:51:08 \n Refreshed Time:${new Date()}`);
+    res.send(`\nv7 Last changed on - Sun Jul 09 2023 22:51:08 \n Refreshed Time:${new Date()}`);
 
 })
 
