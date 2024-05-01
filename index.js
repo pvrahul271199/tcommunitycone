@@ -29,6 +29,7 @@ const tweetMessages = [];
             console.log(i,"30 minutes timer started");
             await timer(1800000);
         }
+        console.log("calling selectnews")
         await selectNews();
     }else
      {
@@ -56,12 +57,12 @@ const tweetNews= async (tweetMessages) => {
 
 app.get('/isWorking', (req, res) => {
     selectNews()
-    res.send(`\nv7 Last changed on - Sun Jul 09 2023 22:51:08 \n Refreshed Time:${new Date()}`);
+    res.send(`\nv8 Last changed on - Sun Jul 09 2023 22:51:08 \n Refreshed Time:${new Date()}`);
 
 })
 
 app.get('/version', (req, res) => {
-    res.send(`\nv7`);
+    res.send(`\nv8`);
 
 })
 
