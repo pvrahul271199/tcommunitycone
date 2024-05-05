@@ -62,7 +62,7 @@ app.get('/isWorking', (req, res) => {
 })
 
 app.get('/version', (req, res) => {
-    res.send(`\nv10`);
+    res.send(`\nv11`);
 
 })
 
