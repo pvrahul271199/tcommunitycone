@@ -61,7 +61,7 @@ app.get('/isWorking', (req, res) => {
 
 })
 
-app.get('/version', (req, res) => {
+app.get('/', (req, res) => {
     res.send(`\nv11`);
 
 })
