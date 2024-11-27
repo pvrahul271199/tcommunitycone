@@ -2,6 +2,7 @@ import { rwUser } from './services/twitterapi/twitterUser.js';
 import { isSameDate } from './tools/isSameDate.js';
 import { callNewsAPI } from './services/newsapi/newsReq.js';
 import express from 'express';
+import cron from "node-cron";
 
 const app = express();
 
@@ -52,14 +53,6 @@ const tweetNews= async (tweetMessages) => {
         console.log(e)
       }
 }
-
-import { rwUser } from './services/twitterapi/twitterUser.js';
-import express from 'express';
-
-const app = express();
-
-
-const PORT = process.env.PORT || 8000
 
 async function fetchNewsAndPostTweets() {
     try {
@@ -127,9 +120,13 @@ app.get('/', (req, res) => {
 })
 app.get('/post-news', async (req, res) => {
     try {
-        await fetchNewsAndPostTweets();
-        res.send('News posting started. Tweets will be posted every 30 minutes.');
+        res.send('News posting started. Tweets will be posted every 30 minutes, and cron job scheduled to run every 3 hours.');
+        cron.schedule('0 */3 * * *', async () => {
+            console.log('Cron job triggered to post news every 3 hours...');
+            await fetchNewsAndPostTweets(); // Call the function to fetch news and post tweets
+        });
     } catch (error) {
+        console.error('Error in the /post-news route:', error);
         res.status(500).send('An error occurred while posting news.');
     }
 });
