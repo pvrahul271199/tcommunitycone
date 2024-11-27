@@ -53,10 +53,70 @@ const tweetNews= async (tweetMessages) => {
       }
 }
 
+import { rwUser } from './services/twitterapi/twitterUser.js';
+import express from 'express';
+
+const app = express();
+
+
+const PORT = process.env.PORT || 8000
+
+async function fetchNewsAndPostTweets() {
+    try {
+        const response = await fetch("https://api.hindustantimes.com/api/app/homenew/sectionfeed/v2/latest?size=1", {
+            method: "GET",
+            headers: {
+                "accept": "application/json, text/javascript, */*; q=0.01",
+                "accept-language": "en-GB,en;q=0.9",
+                "priority": "u=1, i",
+                "sec-ch-ua": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+                "sec-ch-ua-mobile": "?0",
+                "sec-ch-ua-platform": "\"macOS\"",
+                "sec-fetch-dest": "empty",
+                "sec-fetch-mode": "cors",
+                "sec-fetch-site": "same-site",
+                "Referer": "https://www.hindustantimes.com/",
+                "Referrer-Policy": "no-referrer-when-downgrade",
+                "Cookie": "ht-city=KOCHI; ht-country=IN"
+            }
+        });
+
+        const data = await response.json();
+
+        // Extract relevant news details (headLine and websiteURL)
+        const newsItems = data.content.sectionItems.map(item => ({
+            headLine: item.headLine,
+            websiteURL: item.websiteURL
+        }));
+
+        async function postTweet(newsItem) {
+            const message = `${newsItem.headLine} \n${newsItem.websiteURL}`;
+            try {
+                await rwUser.v2.tweet(message);
+                console.log(`Tweet posted: ${message}`);
+            } catch (error) {
+                console.error(`Error posting tweet: ${error}`);
+            }
+        }
+
+        for (let i = 0; i < newsItems.length; i++) {
+            const newsItem = newsItems[i];
+            await postTweet(newsItem);  // Post the tweet
+            if (i < newsItems.length - 1) {
+                console.log(`Waiting for 30 minutes before posting the next tweet...`);
+                await new Promise(resolve => setTimeout(resolve, 1800000)); // 30 minutes delay
+            }
+        }
+
+    } catch (error) {
+        console.error('Error fetching or posting news:', error);
+    }
+}
+
 
 
 app.get('/isWorking', (req, res) => {
-    selectNews()
+    // selectNews()
     res.send(`\nv9 Last changed on - Sun Jul 09 2023 22:51:08 \n Refreshed Time:${new Date()}`);
 
 })
@@ -65,6 +125,15 @@ app.get('/', (req, res) => {
     res.send(`\nv11`);
 
 })
+app.get('/post-news', async (req, res) => {
+    try {
+        await fetchNewsAndPostTweets();
+        res.send('News posting started. Tweets will be posted every 30 minutes.');
+    } catch (error) {
+        res.status(500).send('An error occurred while posting news.');
+    }
+});
+
 
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`)

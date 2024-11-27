@@ -42,4 +42,6 @@ async function callNewsAPI() {
     }
 };
 
+
+
 export { callNewsAPI };
