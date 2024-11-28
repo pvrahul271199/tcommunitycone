@@ -126,7 +126,7 @@ app.get('/isWorking', (req, res) => {
 })
 
 app.get('/', (req, res) => {
-    res.send(`\nv11`);
+    res.send(`\nv12`);
 
 })
 app.get('/post-news', async (req, res) => {
