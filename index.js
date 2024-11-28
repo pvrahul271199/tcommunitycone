@@ -106,7 +106,18 @@ async function fetchNewsAndPostTweets() {
     }
 }
 
-
+async function scheduleJob(){
+    try {
+        await fetchNewsAndPostTweets();
+        cron.schedule('0 */3 * * *', async () => {
+            console.log('Cron job triggered to post news every 3 hours...');
+            await fetchNewsAndPostTweets(); // Call the function to fetch news and post tweets
+        });
+    } catch (error) {
+        console.error('Error in the /post-news route:', error);
+        res.status(500).send('An error occurred while posting news.');
+    }
+}
 
 app.get('/isWorking', (req, res) => {
     // selectNews()
@@ -119,17 +130,7 @@ app.get('/', (req, res) => {
 
 })
 app.get('/post-news', async (req, res) => {
-    try {
-        await fetchNewsAndPostTweets();
-        res.send('News posting started. Tweets will be posted every 30 minutes, and cron job scheduled to run every 3 hours.');
-        cron.schedule('0 */3 * * *', async () => {
-            console.log('Cron job triggered to post news every 3 hours...');
-            await fetchNewsAndPostTweets(); // Call the function to fetch news and post tweets
-        });
-    } catch (error) {
-        console.error('Error in the /post-news route:', error);
-        res.status(500).send('An error occurred while posting news.');
-    }
+    await scheduleJob();
 });
 
 
