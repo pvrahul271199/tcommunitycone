@@ -1,8 +1,6 @@
 import fetch from 'node-fetch'
 import { isSameResponse } from '../../tools/isSameResponse.js';
 
-
-
 const url = 'https://news-api14.p.rapidapi.com/top-headlines?country=in&language=en&pageSize=6';
 const options = {
   method: 'GET',
@@ -12,34 +10,40 @@ const options = {
   }
 };
 
-
-
-var data = [];
 let previousResponse = [];
+
+/**
+ * Fetches news from the API and returns only new articles
+ * @returns {Promise<Array>} New articles or empty array if no new news
+ */
 async function callNewsAPI() {
     try {
-        console.log("1");
+        console.log("Fetching news from API...");
         const result = await fetch(url, options);
-        console.log("2",result);
-        const newResult = await result.json();
-        console.log("3",newResult);
-        const response = await newResult.articles;
-        console.log("response",response);
-        console.log(response.length);
-        console.log(isSameResponse(previousResponse, response));
-        if (previousResponse.length>0 && isSameResponse(previousResponse, response)) {
-            console.log("no new news");
-            return ""
-        } else {
-            //data = response.data.value;
-            previousResponse = response;
-            console.log("actual data",response);
-            return response;
-          }
         
+        if (!result.ok) {
+            throw new Error(`API responded with status: ${result.status}`);
+        }
+        
+        const newResult = await result.json();
+        const articles = newResult.articles || [];
+        
+        console.log(`Retrieved ${articles.length} articles`);
+        
+        // Check if we have new content
+        if (previousResponse.length > 0 && isSameResponse(previousResponse, articles)) {
+            console.log("No new articles found");
+            return [];
+        } else {
+            // Store current response for future comparison
+            previousResponse = articles;
+            console.log(`Found ${articles.length} new articles`);
+            return articles;
+        }
     } catch (error) {
-        console.error("error",error);
+        console.error("Error fetching news:", error.message);
+        return [];
     }
-};
+}
 
 export { callNewsAPI };
